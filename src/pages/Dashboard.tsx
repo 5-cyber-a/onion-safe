@@ -53,51 +53,56 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header Stat row */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatCard 
-          label="종합 안전 점수" 
-          value={`${siteScore}/100`} 
-          icon={ShieldIcon} 
-          trend="+2.5%" 
-          color="blue" 
-        />
-        <StatCard 
-          label="활성 장비 (OEM)" 
-          value="12" 
-          icon={Zap} 
-          subtitle="92% 가동률" 
-          color="amber" 
-        />
-        <StatCard 
-          label="미결 체크리스트" 
-          value="3" 
-          icon={ClipboardCheck} 
-          subtitle="오늘 남은 항목" 
-          color="rose" 
-        />
-        <StatCard 
-          label="현장 인원" 
-          value="48" 
-          icon={HardHat} 
-          subtitle="A/B구역 통합" 
-          color="emerald" 
-        />
+    <div className="max-w-7xl mx-auto px-8 py-8 space-y-8 bg-slate-50 min-h-screen">
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Safety Management SaaS</h2>
+          <h3 className="text-2xl font-bold text-slate-800">Risk Control Center</h3>
+        </div>
+        <div className="bg-green-50 border border-green-100 px-3 py-1 rounded-full flex items-center gap-2">
+          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span className="text-xs font-semibold text-green-700 uppercase">AI Monitoring Active</span>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row items-center gap-8">
+        <div className="relative w-32 h-32 flex items-center justify-center">
+          <svg className="absolute inset-0 w-full h-full -rotate-90">
+            <circle cx="64" cy="64" r="58" fill="none" stroke="#f1f5f9" strokeWidth="10"/>
+            <circle 
+              cx="64" 
+              cy="64" 
+              r="58" 
+              fill="none" 
+              stroke="#2563eb" 
+              strokeWidth="10" 
+              strokeDasharray="364" 
+              strokeDashoffset={364 - (364 * siteScore / 100)} 
+              className="transition-all duration-1000 ease-out"
+            />
+          </svg>
+          <div className="text-center">
+            <span className="text-3xl font-bold text-slate-800 block text-display">{siteScore}</span>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Safety Score</span>
+          </div>
+        </div>
+        <div className="flex-1">
+          <h4 className="font-bold text-slate-800 mb-2 underline decoration-blue-500 underline-offset-4">Premium Insurance Grade</h4>
+          <p className="text-sm text-slate-500 leading-relaxed max-w-lg">
+            현재 귀하의 현장 안전 점수는 다음 달 산업재해 보험료에서 <span className="text-blue-600 font-bold">12% 프리미엄 할인</span>을 받을 수 있는 우수 등급에 해당합니다.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Chart Section */}
         <div className="lg:col-span-2 space-y-8">
-          <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold flex items-center gap-2">
-                <Activity className="w-5 h-5 text-blue-500" />
-                장비 모니터링 라이브 (OEM-Integrated)
-              </h3>
-              <div className="flex gap-2">
-                <span className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-medium">실시간</span>
-              </div>
+          <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest flex items-center justify-between">
+              Live Monitoring (OEM-Integrated)
+              <span className="flex items-center gap-1.5 text-blue-600">
+                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                Real-time
+              </span>
             </div>
             
             <div className="h-64 w-full">
@@ -105,20 +110,20 @@ export default function Dashboard() {
                 <AreaChart data={MOCK_TELEMETRY}>
                   <defs>
                     <linearGradient id="colorLoad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1}/>
-                      <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#2563eb" stopOpacity={0.1}/>
+                      <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#64748b'}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#64748b'}} />
+                  <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{fontSize: 11, fill: '#94a3b8', fontWeight: 600}} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fontSize: 11, fill: '#94a3b8', fontWeight: 600}} />
                   <Tooltip 
-                    contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                    contentStyle={{ borderRadius: '12px', border: '1px solid #f1f5f9', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                   />
                   <Area 
                     type="monotone" 
                     dataKey="load" 
-                    stroke="#3b82f6" 
+                    stroke="#2563eb" 
                     strokeWidth={2} 
                     fillOpacity={1} 
                     fill="url(#colorLoad)" 
@@ -135,21 +140,17 @@ export default function Dashboard() {
             </div>
           </section>
 
-          {/* Checklist & Analysis */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <ClipboardCheck className="w-5 h-5 text-emerald-500" />
-                현장 안전 체크리스트
-              </h3>
-              <div className="space-y-3">
+            <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Pre-Work Checklist</div>
+              <div className="space-y-2">
                 {MOCK_CHECKLIST.map(item => (
-                  <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl">
-                    <span className="text-sm font-medium text-gray-700">{item.task}</span>
+                  <div key={item.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <span className="text-xs font-semibold text-slate-700">{item.task}</span>
                     {item.status === 'checked' ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
                     ) : (
-                      <div className="w-5 h-5 border-2 border-gray-200 rounded-full" />
+                      <div className="w-4 h-4 border-2 border-slate-200 rounded-full" />
                     )}
                   </div>
                 ))}
@@ -157,25 +158,22 @@ export default function Dashboard() {
               <button 
                 onClick={handleAIAnalysis}
                 disabled={analyzing}
-                className="w-full mt-6 py-3 bg-blue-600 text-white rounded-2xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all disabled:opacity-50"
+                className="w-full mt-6 py-2.5 bg-slate-900 text-white rounded-lg text-xs font-bold uppercase tracking-wide hover:bg-slate-800 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {analyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
-                AI 위험 분석 및 리포트 생성
+                {analyzing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Zap className="w-3 h-3" />}
+                Analyze Risks & Score
               </button>
             </section>
 
-            <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col">
-              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-purple-500" />
-                AI 안전 분석 리포트
-              </h3>
-              <div className="flex-1 overflow-y-auto max-h-[300px] prose prose-sm text-gray-600 bg-gray-50 p-4 rounded-2xl">
+            <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col">
+              <div className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">AI Safety Analysis</div>
+              <div className="flex-1 overflow-y-auto max-h-[300px] prose prose-slate prose-xs text-slate-600 bg-slate-50/50 p-4 rounded-xl border border-slate-100 border-dashed">
                 {report ? (
                   <ReactMarkdown>{report}</ReactMarkdown>
                 ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-2">
-                    <Info className="w-8 h-8 opacity-20" />
-                    <p className="text-xs">데이터를 분석하면 리포트가 생성됩니다.</p>
+                  <div className="h-full flex flex-col items-center justify-center text-slate-300 space-y-2 py-8">
+                    <FileText className="w-8 h-8 opacity-20" />
+                    <p className="text-[10px] font-bold uppercase">Generate report to view analysis</p>
                   </div>
                 )}
               </div>
@@ -183,37 +181,27 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Sidebar logs & status */}
         <div className="space-y-8">
-          <section className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              현장 실시간 로그
-            </h3>
-            <div className="space-y-6">
-              {logs.map(log => (
-                <div key={log.id} className="relative pl-6 border-l border-slate-700">
-                  <div className="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-slate-500" />
-                  <div className="flex justify-between items-start mb-1">
-                    <span className={cn(
-                      "text-[10px] font-bold uppercase px-1.5 py-0.5 rounded",
-                      log.type === 'warn' ? "bg-amber-500/20 text-amber-500" : "bg-blue-500/20 text-blue-500"
-                    )}>
-                      {log.type}
-                    </span>
-                    <span className="text-[10px] text-slate-500 font-mono">{log.time}</span>
-                  </div>
-                  <p className="text-xs font-medium text-slate-300 leading-relaxed">
-                    {log.msg}
-                  </p>
-                </div>
-              ))}
+          <section className="bg-blue-600 rounded-2xl p-6 text-white shadow-lg shadow-blue-200">
+            <div className="flex flex-col mb-4">
+              <span className="text-[10px] font-bold uppercase opacity-80 tracking-widest">SaaS Status</span>
+              <span className="text-xl font-bold tracking-tight">Enterprise Tier</span>
+            </div>
+            <p className="text-xs opacity-80 leading-relaxed mb-6">
+              실시간 원청 공유 및 자동 점수 산출 기능이 활성화되어 있습니다.
+            </p>
+            <div className="flex justify-between items-end border-t border-blue-400 pt-4">
+              <span className="text-[10px] font-bold uppercase tracking-widest">Billing Score</span>
+              <div className="text-right">
+                <span className="text-2xl font-bold">$450</span>
+                <span className="text-xs opacity-80"> / month</span>
+              </div>
             </div>
           </section>
 
-          <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-            <h3 className="text-lg font-bold mb-4">안전 등급 등락 (30일)</h3>
-            <div className="h-40 w-full">
+          <section className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">Monthly Trend</div>
+            <div className="h-40 w-full font-mono">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={[
                   { name: 'W1', score: 82 },
@@ -221,15 +209,12 @@ export default function Dashboard() {
                   { name: 'W3', score: 79 },
                   { name: 'W4', score: 91 },
                 ]}>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 10}} />
-                  <Tooltip cursor={{fill: '#f8fafc'}} contentStyle={{ borderRadius: '12px', border: 'none' }} />
-                  <Bar dataKey="score" fill="#e2e8f0" radius={[4, 4, 0, 0]} />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 9, fontWeight: 700, fill: '#cbd5e1'}} />
+                  <Tooltip cursor={{fill: '#f1f5f9'}} contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '10px' }} />
+                  <Bar dataKey="score" fill="#e2e8f0" radius={[4, 4, 4, 4]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <p className="text-[10px] text-gray-400 mt-4 leading-relaxed">
-              * 안전 점수는 건설 보험 요율 산정 시 증빙 자료로 자동 연동됩니다.
-            </p>
           </section>
         </div>
       </div>

@@ -23,35 +23,39 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-md w-full bg-white rounded-2xl border border-slate-200 shadow-sm p-10 text-center"
       >
-        <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center">
-            <Shield className="w-8 h-8 text-blue-600" />
+        <div className="flex justify-center mb-8">
+          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100">
+            <Shield className="w-8 h-8 text-white" />
           </div>
         </div>
         
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 font-display">ShieldSafe</h1>
-        <p className="text-gray-500 mb-8">
-          프리미엄 건설 현장 안전 관리 플랫폼에 오신 것을 환영합니다.
+        <h1 className="text-2xl font-bold text-slate-800 mb-2 uppercase tracking-tight">
+          ShieldSafe <span className="text-blue-600 font-medium">Console</span>
+        </h1>
+        <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-10">
+          Premium Construction Safety SaaS
         </p>
 
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-gray-900 text-white px-6 py-4 rounded-2xl font-medium hover:bg-gray-800 transition-all disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-3 bg-slate-900 text-white px-6 py-4 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-all disabled:opacity-50"
         >
-          {loading ? "연결 중..." : "Google 계정으로 시작하기"}
+          {loading ? "Authenticating..." : "Access with Google"}
           <ArrowRight className="w-4 h-4" />
         </button>
 
-        <p className="mt-8 text-xs text-gray-400">
-          계속 진행함으로써 서비스 이용 약관 및 개인정보 처리방침에 동의하게 됩니다.
-        </p>
+        <div className="mt-10 pt-6 border-t border-slate-50">
+          <p className="text-[10px] text-slate-400 font-medium leading-relaxed">
+            By proceeding, you agree to our <span className="underline cursor-pointer">Security Protocols</span> and <span className="underline cursor-pointer">Data Policy</span>.
+          </p>
+        </div>
       </motion.div>
     </div>
   );

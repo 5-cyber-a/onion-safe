@@ -14,53 +14,56 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-bottom border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <Shield className="w-8 h-8 text-blue-600" />
-            <span className="text-xl font-bold tracking-tight text-gray-900">ShieldSafe</span>
-          </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 shrink-0">
+      <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <Shield className="w-4 h-4 text-white" />
+          </div>
+          <span className="text-xl font-bold tracking-tight text-slate-800 uppercase">
+            ShieldSafe <span className="text-blue-600 font-medium">Premium</span>
+          </span>
+        </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={cn(
-                  "flex items-center gap-2 text-sm font-medium transition-colors",
-                  pathname === item.href ? "text-blue-600" : "text-gray-500 hover:text-gray-900"
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                "transition-colors hover:text-blue-600",
+                pathname === item.href ? "text-blue-600" : "text-slate-600"
+              )}
+            >
+              {item.name === '대시보드' ? 'Management Console' : 'Equipment Mall'}
+            </Link>
+          ))}
+          <div className="h-4 w-px bg-slate-300 mx-2"></div>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-slate-200 rounded-full border border-slate-300 overflow-hidden">
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="profile" />
+                ) : (
+                  <div className="w-full h-full bg-slate-200" />
                 )}
-              >
-                <item.icon className="w-4 h-4" />
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            {user ? (
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                  {user.displayName || '사용자'}
-                </span>
-                <button 
-                  onClick={() => auth.signOut()}
-                  className="text-xs text-gray-400 hover:text-red-500 underline underline-offset-4"
-                >
-                  로그아웃
-                </button>
               </div>
-            ) : (
-              <Link
-                to="/auth"
-                className="flex items-center gap-2 text-sm font-medium text-gray-900 border border-gray-900 px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-all"
+              <span className="text-slate-800 truncate max-w-[120px]">{user.displayName || 'Admin'}</span>
+              <button 
+                onClick={() => auth.signOut()}
+                className="ml-2 text-[10px] uppercase font-bold text-slate-400 hover:text-red-500"
               >
-                <User className="w-4 h-4" />
-                로그인
-              </Link>
-            )}
-          </div>
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/auth"
+              className="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors"
+            >
+              Access Console
+            </Link>
+          )}
         </div>
       </div>
     </nav>
