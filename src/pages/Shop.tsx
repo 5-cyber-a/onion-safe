@@ -162,7 +162,7 @@ export default function Shop() {
               </div>
               <h5 className="text-[10px] font-bold text-slate-800 uppercase tracking-widest mb-1">공급사 파트너 프로그램</h5>
               <p className="text-[10px] text-slate-500 leading-normal font-bold">
-                생산 업체 및 유통사로 등록하여 귀하의 스마트 장비를 쉴드세이프 분석 시스템에 직접 연동하세요.
+                생산 업체 및 유통사로 등록하여 귀하의 스마트 장비를 onion 분석 시스템에 직접 연동하세요.
               </p>
             </div>
           </aside>

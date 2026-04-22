@@ -21,7 +21,7 @@ export default function Navbar() {
             <Shield className="w-4 h-4 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tight text-slate-800 uppercase">
-            ShieldSafe <span className="text-blue-600 font-medium">Premium</span>
+            onion <span className="text-blue-600 font-medium">SaaS</span>
           </span>
         </Link>
 

@@ -36,10 +36,10 @@ export default function Auth() {
         </div>
         
         <h1 className="text-2xl font-bold text-slate-800 mb-2 uppercase tracking-tight">
-          ShieldSafe <span className="text-blue-600 font-medium font-display">Console</span>
+          onion <span className="text-blue-600 font-medium font-display">Console</span>
         </h1>
         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-10">
-          프리미엄 건설 현장 안전 관리 SaaS
+          지능형 건설 현장 통합 안전 계측 서비스
         </p>
 
         <button
@@ -53,7 +53,7 @@ export default function Auth() {
 
         <div className="mt-10 pt-6 border-t border-slate-50">
           <p className="text-[10px] text-slate-400 font-bold leading-relaxed px-4">
-            로그인함으로써 귀하는 ShieldSafe의 <span className="underline cursor-pointer">보안 규정</span> 및 <span className="underline cursor-pointer">개인정보 처리방침</span>에 동의하게 됩니다.
+            로그인함으로써 귀하는 onion의 <span className="underline cursor-pointer">보안 규정</span> 및 <span className="underline cursor-pointer">개인정보 처리방침</span>에 동의하게 됩니다.
           </p>
         </div>
       </motion.div>
