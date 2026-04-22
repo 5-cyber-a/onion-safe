@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "User profiles for auth and roles",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "client", "supplier"] },
+        "company": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "sites": {
+      "title": "Site",
+      "description": "Construction sites",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "managerId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "equipment": {
+      "title": "Equipment",
+      "description": "OEM Equipment with monitoring",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siteId": { "type": "string" },
+        "oemName": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "monitoring_logs": {
+      "title": "Monitoring Log",
+      "description": "Telemetry data from equipment",
+      "type": "object",
+      "properties": {
+        "equipmentId": { "type": "string" },
+        "siteId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metrics": { "type": "object" },
+        "threatLevel": { "type": "string" }
+      }
+    },
+    "reports": {
+      "title": "Safety Report",
+      "description": "Safety analysis and scores",
+      "type": "object",
+      "properties": {
+        "siteId": { "type": "string" },
+        "type": { "type": "string" },
+        "safetyScore": { "type": "number" },
+        "content": { "type": "string" }
+      }
+    },
+    "products": {
+      "title": "Product",
+      "description": "PPE and tools in the shop",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "users", "description": "Global user directory" },
+    "/sites/{siteId}": { "schema": "sites", "description": "Construction sites list" },
+    "/sites/{siteId}/equipment/{equipmentId}": { "schema": "equipment", "description": "Equipment at a specific site" },
+    "/monitoring_logs/{logId}": { "schema": "monitoring_logs", "description": "Global event stream for telemetry" },
+    "/reports/{reportId}": { "schema": "reports", "description": "Safety reports" },
+    "/products/{productId}": { "schema": "products", "description": "Marketplace products" }
+  }
+}
