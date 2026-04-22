@@ -1,9 +1,24 @@
 import { GoogleGenAI } from "@google/genai";
 
 // Initialize AI
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const getApiKey = () => {
+  // Vite의 define으로 주입된 값을 확인
+  const key = process.env.GEMINI_API_KEY;
+  
+  if (!key || key === "undefined" || key === "null" || key.trim() === "") {
+    console.warn("GEMINI_API_KEY가 설정되지 않았습니다. AI 기능이 제한됩니다.");
+    return null;
+  }
+  return key;
+};
+
+const apiKey = getApiKey();
+// apiKey가 확실히 있을 때만 인스턴스 생성
+export const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export async function analyzeSafety(checklistData: any, telemetryData: any) {
+  if (!ai) return "AI API 키가 설정되지 않았습니다. 관리자에게 문의하세요.";
+
   const prompt = `
     당신의 역할은 건설 현장 안전 분석 AI 전문가입니다.
     다음은 현장 체크리스트와 장비 텔레메트리 데이터입니다.
@@ -33,6 +48,8 @@ export async function analyzeSafety(checklistData: any, telemetryData: any) {
 }
 
 export async function generateSafetyQuote(siteInfo: { location: string, scale: string, type: string }) {
+  if (!ai) return "AI API 키가 설정되지 않았습니다. 관리자에게 문의하세요.";
+
   const prompt = `
     당신의 역할은 건설 안전 견적 전문가입니다.
     사용자의 현장 정보를 바탕으로 안전 장비 패키지를 아주 심플하고 직관적으로 제안하세요.
