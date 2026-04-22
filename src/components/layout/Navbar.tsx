@@ -35,7 +35,7 @@ export default function Navbar() {
                 pathname === item.href ? "text-blue-600" : "text-slate-600"
               )}
             >
-              {item.name === '대시보드' ? 'Management Console' : 'Equipment Mall'}
+              {item.name === '대시보드' ? '통합 관리 콘솔' : '안전 장비 몰'}
             </Link>
           ))}
           <div className="h-4 w-px bg-slate-300 mx-2"></div>
@@ -48,12 +48,12 @@ export default function Navbar() {
                   <div className="w-full h-full bg-slate-200" />
                 )}
               </div>
-              <span className="text-slate-800 truncate max-w-[120px]">{user.displayName || 'Admin'}</span>
+              <span className="text-slate-800 truncate max-w-[120px]">{user.displayName || '관리자'}</span>
               <button 
                 onClick={() => auth.signOut()}
-                className="ml-2 text-[10px] uppercase font-bold text-slate-400 hover:text-red-500"
+                className="ml-2 text-[10px] font-bold text-slate-400 hover:text-red-500 uppercase"
               >
-                Sign Out
+                로그아웃
               </button>
             </div>
           ) : (
@@ -61,7 +61,7 @@ export default function Navbar() {
               to="/auth"
               className="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors"
             >
-              Access Console
+              시스템 시작하기
             </Link>
           )}
         </div>
